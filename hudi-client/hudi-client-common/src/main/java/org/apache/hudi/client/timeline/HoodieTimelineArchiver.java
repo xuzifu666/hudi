@@ -218,7 +218,7 @@ public class HoodieTimelineArchiver<T extends HoodieAvroPayload, I, K, O> {
               completedCommitsTimeline.findInstantsModifiedAfterByCompletionTime(latestCompactionTime.get()).firstInstant());
         }
       } catch (Exception e) {
-        throw new HoodieException("Error limiting instant archival based on metadata table", e);
+        throw new HoodieException("Error limiting instant arcgit chival based on metadata table", e);
       }
     }
 
