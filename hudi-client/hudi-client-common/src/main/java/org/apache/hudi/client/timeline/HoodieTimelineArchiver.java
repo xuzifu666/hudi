@@ -217,8 +217,12 @@ public class HoodieTimelineArchiver<T extends HoodieAvroPayload, I, K, O> {
           earliestInstantToRetainCandidates.add(
               completedCommitsTimeline.findInstantsModifiedAfterByCompletionTime(latestCompactionTime.get()).firstInstant());
         }
+      } catch (UnsupportedOperationException unsupportedOperationException) {
+        // If tableMetadata is FileSystemBackedTableMetadata which not support getLatestCompactionTime
+        // would error out with UnsupportedOperationException
+        LOG.warn("tableMetadata is FileSystemBackedTableMetadata and not support getLatestCompactionTime, so skip get latestCompactionTime.");
       } catch (Exception e) {
-        throw new HoodieException("Error limiting instant arcgit chival based on metadata table", e);
+        throw new HoodieException("Error limiting instant archival based on metadata table", e);
       }
     }
 
